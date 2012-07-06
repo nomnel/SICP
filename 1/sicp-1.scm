@@ -3,7 +3,12 @@
   (export square
 	  sqrt
 	  smallest-divisor
-	  prime?))
+	  prime?
+	  expmod
+	  fast-prime?
+	  timed-prime-test
+	  start-prime-test
+	  report-prime))
 
 (select-module sicp-1)
 
@@ -61,3 +66,22 @@
   (cond ((= times 0) #t)
 	((fermat-test n) (fast-prime? n (- times 1)))
 	(else #f)))
+
+(define (runtime)
+  (receive (a b) (sys-gettimeofday)
+    (+ (* a 1000000) b)))
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (runtime)))
+
+(define (start-prime-test n start-time)
+  (cond ((prime? n)
+	 (report-prime (- (runtime) start-time))
+	 #t)
+	(else #f)))
+
+(define (report-prime elapsed-time)
+  (display "***")
+  (display elapsed-time))

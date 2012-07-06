@@ -1,0 +1,15 @@
+(define (double n)
+  (+ n n))
+
+(define (halve n)
+  (/ n 2))
+
+(define (fast-* a b)
+  (define (fast-*-iter c a b)
+    (cond ((= b 0) c)
+	  ((even? b)
+	   (if (= c 0)
+	       (+ a (fast-*-iter c a (- b 1)))
+	       (fast-*-iter (double c) a (halve b))))
+	  (else (fast-*-iter (+ c a) a (- b 1)))))
+  (fast-*-iter 0 a b))

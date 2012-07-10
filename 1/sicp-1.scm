@@ -5,6 +5,7 @@
 	  smallest-divisor
 	  prime?
 	  expmod
+	  random
 	  fast-prime?
 	  timed-prime-test
 	  start-prime-test
@@ -57,10 +58,13 @@
 
 (use srfi-27) ;  random-integer
 
+(define (random n)
+  (random-integer n))
+
 (define (fermat-test n)
   (define (try-it a)
     (= (expmod a n n) a))
-  (try-it (+ 1 (random-integer (- n 1)))))
+  (try-it (+ 1 (random (- n 1)))))
 
 (define (fast-prime? n times)
   (cond ((= times 0) #t)

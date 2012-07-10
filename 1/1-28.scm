@@ -1,0 +1,22 @@
+(add-load-path "." :relative)
+(use sicp-1)
+
+(define (miller-rabin-test n)
+  (define (expmod base exp m)
+    (cond ((= exp 0) 1)
+	  ((even? exp)
+	   (let* ((tmp (expmod base (/ exp 2) m))
+		  (tmp2 (square tmp)))
+	     (if (and (< 1 tmp (- n 1))
+		      (= 1 (modulo (square tmp) n)))
+		 0
+		 (remainder tmp2 m))))
+	  (else (remainder (* base (expmod base (- exp 1) m)) m))))
+  (define (try-it a)
+    (= 1 (expmod a (- n 1) n)))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (f-prime? n times)
+  (cond ((= times 0) #t)
+	((miller-rabin-test n) (f-prime? n (- times 1)))
+	(else #f)))

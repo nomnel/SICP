@@ -9,7 +9,8 @@
 	  fast-prime?
 	  timed-prime-test
 	  start-prime-test
-	  report-prime))
+	  report-prime
+	  inc))
 
 (select-module sicp-1)
 
@@ -89,3 +90,6 @@
 (define (report-prime elapsed-time)
   (display "***")
   (display elapsed-time))
+
+(define (inc n)
+  (+ 1 n))

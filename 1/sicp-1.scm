@@ -12,7 +12,10 @@
 	  report-prime
 	  inc
 	  fixed-point
-	  cont-frac))
+	  cont-frac
+	  compose
+	  repeated
+	  average-damp))
 
 (select-module sicp-1)
 
@@ -136,3 +139,16 @@
 	res
 	(iter (- i 1) (/ (n i) (+ (d i) res)))))
   (iter (- k 1) (/ (n k) (d k))))
+
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (repeated f n)
+  (define (iter res c)
+    (if (= c n)
+	res
+	(iter (compose f res) (+ c 1))))
+  (iter f 1))

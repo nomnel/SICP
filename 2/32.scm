@@ -1,0 +1,11 @@
+(define (subsets s)
+  (if (null? s)
+      (list '())
+      (let ((rest (subsets (cdr s))))
+	(append rest (map (lambda (r) (cons (car s) r))
+			  rest)))))
+
+;; ()
+;; (1) (2) (3)
+;; (1 2) (2 3) (1 3)
+;; (1 2 3)

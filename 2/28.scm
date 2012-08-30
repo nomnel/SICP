@@ -1,0 +1,7 @@
+(define (fringe ls)
+  (if (pair? ls)
+      (if (pair? (car ls))
+	  (append (fringe (car ls))
+		  (fringe (cdr ls)))
+	  (cons (car ls) (fringe (cdr ls))))
+      ls))

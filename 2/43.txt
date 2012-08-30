@@ -1,0 +1,7 @@
+本来, queen-colsはboard-size回しか呼ばれないが,
+Louisの場合, queen-colsが(以下board-sizeをnとして)
+1 + n^1 + ... + n^(n-1) = (n^n-1)/(n-1)回呼ばれる.
+
+よって,Louisのプログラムがパズルを解くのには
+(n^n-1)/(n-1)/n * T ≒ (n^n-1)/(n-2) * T
+かかる

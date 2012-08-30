@@ -1,0 +1,11 @@
+(define (square-tree tree)
+  (cond ((null? tree) '())
+	((not (pair? tree)) (expt tree 2))
+	(else (cons (square-tree (car tree))
+		    (square-tree (cdr tree))))))
+
+(define (square-tree tree)
+  (if (pair? tree)
+      (map (lambda (t) (square-tree t))
+	   tree)
+      (expt tree 2)))

@@ -1,2 +1,3 @@
 *.scm~
+*.txt~
 .DS_Store
